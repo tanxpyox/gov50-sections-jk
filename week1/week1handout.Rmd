@@ -1,0 +1,82 @@
+---
+title: "\\textsc{Week 1 Handout}"
+subtitle: "Gov 50 Data Science for the Social Sciences"
+subject: "Week 1 Handout"
+author: "John Koo"
+date: "September 2, 2025"
+csl: american-political-science-association.csl
+
+classoption: [letterpaper]
+
+header-includes:
+  - \usepackage[notextcomp]{kpfonts}
+  - \usepackage{Inconsolata}
+  - \usepackage{caption}
+  - \usepackage{float}
+  - \captionsetup*{labelfont={sc},textfont={it},labelsep={colon},justification=centering,singlelinecheck=true}
+
+fontsize: 11pt
+
+output: 
+  pdf_document:
+    # latex_engine: xelatex
+    keep_tex: true
+    number_sections: true
+urlcolor: blue
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Contact Info
+
+\begin{table}[!h]
+
+\centering
+
+\begin{tabular}{l}
+  \textbf{John Koo} \\
+  PhD Candidate, Department of Government \\ \\
+  
+  \textbf{Email}: \href{mailto:johnkoo@fas.harvard.edu}{johnkoo@fas.harvard.edu} \\
+  \textbf{Slack}: @johnkoo (in the Harvard University workspace) \\
+  \textbf{Office hours}: Tuesdays, 1:30pm to 3:30pm (sign-up: \href{https://jkoo.nl/meet}{jkoo.nl/meet}) 
+  \end{tabular}
+\end{table}
+
+# Where to get help outside classes?
+
+- For tech assistance or help with homework: **Course Assistant-led Study Halls**
+
+  >Study halls are a combination of office hours and drop-in tutoring sessions. Course assistants will hold a table usually at one of the house dining halls or common rooms and help students with assignments and course material. Study halls work best if you come as a group and work on the assignments on your own while you are there and ask for help from the CAs when you get stuck.
+  
+  >Schedule: TBA
+
+- For initial help with course content: ask on course Slack (accessible via Canvas sidebar) or sign up for my office hours
+
+- For perspective and inspiration: sign up for Scott's office hours
+
+# Getting the most (grades) out of this class
+
+- Podcast and Article Responses (5%) [one two-page doc every other week]
+- Problem Sets (20%) [seven to eight in total]
+- Mid-term exam (20%) [in-class, written, closed book]
+- Final exam (20%) [in-class, written, closed book]
+- *Final project* (25%) 
+
+  > The project must include: (1) introduction to your question and data, (2) data visualization addressing your question, (3) regression analysis with plain-English interpretation, (4) limitations and potential improvements, and (5) link to GitHub repository with all code.
+
+# Getting Started
+
+- Software: R, RStudio
+
+- Versioning: Git and GitHub
+
+![Git and GitHub](assets/gitvsgithub.png)
+
+# Tasks
+
+1. Create an R project directory
+2. Link it with Git
+3. Publish the directory as a repository on GitHub
