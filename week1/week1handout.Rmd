@@ -39,13 +39,13 @@ knitr::opts_chunk$set(echo = TRUE)
   \textbf{John Koo} \\
   PhD Candidate, Department of Government \\ \\
   
-  \textbf{Email}: \href{mailto:johnkoo@fas.harvard.edu}{johnkoo@fas.harvard.edu} \\
+  \textbf{Email} (preferred): \href{mailto:johnkoo@fas.harvard.edu}{johnkoo@fas.harvard.edu} \\
   \textbf{Slack}: @johnkoo (in the Harvard University workspace) \\
-  \textbf{Office hours}: Tuesdays, 1:30pm to 3:30pm (sign-up: \href{https://jkoo.nl/meet}{jkoo.nl/meet}) 
+  \textbf{Office hours}: Tuesdays, 1:30pm to 3:30pm @ CGIS Cafe (sign-up: \href{https://jkoo.nl/meet}{jkoo.nl/meet}) 
   \end{tabular}
 \end{table}
 
-# Where to get help outside classes?
+# Where to get help?
 
 - For tech assistance or help with homework: **Course Assistant-led Study Halls**
 
@@ -65,7 +65,19 @@ knitr::opts_chunk$set(echo = TRUE)
 - Final exam (20%) [in-class, written, closed book]
 - *Final project* (25%) 
 
-  > The project must include: (1) introduction to your question and data, (2) data visualization addressing your question, (3) regression analysis with plain-English interpretation, (4) limitations and potential improvements, and (5) link to GitHub repository with all code.
+\newpage
+
+Generic advice for maximising grades and efficiency
+
+- Everything you learn should help you work towards the final project (which is the biggest chunk of your grades)
+  - Take the project milestones seriously and do not wait until the last minute
+- Problem sets
+  - Low hanging fruits - don't miss them; Can reuse code in your projects
+  - It's OK to make mistakes (each p-set is 2--3% of your final grade)
+  - Work with your study group; but write up your p-sets individually
+  - Set aside a "focus session" every week to do the problem sets; do not mull over the p-set for the whole week
+- AI allowed and encouraged, except in exams. Start learning how to use AI to debug your code.
+- Keep your code organised in your GitHub repository - you may need them in your final project
 
 # Getting Started
 
@@ -73,10 +85,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 - Versioning: Git and GitHub
 
-![Git and GitHub](assets/gitvsgithub.png)
+![Git and GitHub](assets/gitvsgithub.png){width=75%}
 
 # Tasks
 
 1. Create an R project directory
 2. Link it with Git
 3. Publish the directory as a repository on GitHub
+4. Making your first commit
+
