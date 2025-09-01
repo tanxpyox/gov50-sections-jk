@@ -77,6 +77,7 @@ Generic advice for maximising grades and efficiency
   - Low hanging fruits - don't miss them; Can reuse code in your projects
   - It's OK to make mistakes (each p-set is 2--3% of your final grade)
   - Work with your study group; but write up your p-sets individually
+  - Start early, so you have time to get help
   - Set aside a "focus session" every week to do the problem sets; do not mull over the p-set for the whole week
 - AI allowed and encouraged, except in exams. Start learning how to use AI to debug your code.
 - Keep your code organised in your GitHub repository - you may need them in your final project
@@ -85,7 +86,7 @@ Generic advice for maximising grades and efficiency
 
 - Software: R, RStudio
 
-- Versioning: Git and GitHub
+- Version control: Git and GitHub
 
 ![Git and GitHub](assets/gitvsgithub.png){width=75%}
 
