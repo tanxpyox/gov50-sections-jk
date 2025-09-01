@@ -39,6 +39,46 @@
 \makeatother
 \usepackage{xcolor}
 \usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{graphicx}
 \makeatletter
 \newsavebox\pandoc@box
@@ -57,7 +97,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage[notextcomp]{kpfonts}
 \usepackage{Inconsolata}
 \usepackage{caption}
@@ -83,7 +123,7 @@
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{Gov 50 Data Science for the Social Sciences}
+\subtitle{Gov 50 Data Science for Social Sciences}
 \author{John Koo}
 \date{September 2, 2025}
 
@@ -125,7 +165,8 @@
   \end{quote}
 
   \begin{quote}
-  Schedule: TBA
+  Schedule: Mondays and Wednesdays, 5pm to 9pm (see Syllabus for
+  location)
   \end{quote}
 \item
   For initial help with course content: ask on course Slack (accessible
@@ -209,19 +250,186 @@ Generic advice for maximising grades and efficiency
 \caption{Git and GitHub}
 \end{figure}
 
-\section{Tasks}\label{tasks}
+\newpage
+
+\begin{center}
+  \section{Problem Set 0a: GitHub Setup}
+  \textbf{Due: Monday, September 9, 2024 at 11:59 PM}
+\end{center}
+
+\subsection{Overview}\label{overview}
+
+This assignment will get you set up with GitHub, which we'll use
+throughout the semester to share code and track your work. Think of
+GitHub as Google Docs for code - it saves your history and lets you
+collaborate.
+
+\subsection{What You'll Do}\label{what-youll-do}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Create an R project directory
+  Create a GitHub account
 \item
-  Link it with Git
+  Create your first repository
 \item
-  Publish the directory as a repository on GitHub
+  Edit a \texttt{README} file
 \item
-  Making your first commit
+  Submit proof to Gradescope
 \end{enumerate}
+
+\subsection{Step-by-Step Instructions}\label{step-by-step-instructions}
+
+\subsubsection{Part 1: Create Your GitHub
+Account}\label{part-1-create-your-github-account}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Go to \url{https://github.com}
+\item
+  Click ``Sign up''
+\item
+  Choose a username (this will be public, so pick something
+  professional)
+\item
+  Use your Harvard email (optional)
+\item
+  Complete the signup process
+\end{enumerate}
+
+\subsubsection{Part 2: Create Your First
+Repository}\label{part-2-create-your-first-repository}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Once logged in, click the green ``New'' button or the ``+'' icon
+\item
+  Name your repository: \texttt{gov50-fall2024}
+\item
+  Check the box that says ``Add a README file''
+\item
+  Leave everything else as default
+\item
+  Click ``Create repository''
+\end{enumerate}
+
+\subsubsection{Part 3: Edit Your README}\label{part-3-edit-your-readme}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Click on the \texttt{README.md} file
+\item
+  Click the pencil icon to edit
+\item
+  Delete the existing text and add:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\# Gov 50: Data Science for Social Sciences}
+
+\NormalTok{Name: }\CommentTok{[}\OtherTok{Your Name}\CommentTok{]}
+\NormalTok{Harvard ID: }\CommentTok{[}\OtherTok{Your HUID}\CommentTok{]}
+
+\NormalTok{This repository contains my work for Gov 50 (Fall 2024).}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Scroll down and click ``Commit changes''
+\item
+  In the commit message box, write ``Initial setup''
+\item
+  Click ``Commit changes''
+\end{enumerate}
+
+\subsubsection{Part 4: Submit to
+Gradescope}\label{part-4-submit-to-gradescope}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Take a screenshot showing:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Your GitHub username in the top right
+\item
+  Your repository name (\texttt{gov50-fall2024})
+\item
+  Your edited README content
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Save this screenshot as \texttt{lastname\_ps0a.png}
+\item
+  Go to Gradescope (accessiblie via Canvas) and find ``PS0a: GitHub
+  Setup''
+\item
+  Upload your screenshot
+\end{enumerate}
+
+\subsection{Troubleshooting}\label{troubleshooting}
+
+\textbf{``GitHub says my username is taken''}
+
+Try adding numbers or your middle initial.
+
+\textbf{``I can't find the edit button''}
+
+Make sure you're logged in and viewing your own repository.
+
+\textbf{``I accidentally deleted my repository''}
+
+No problem! Just create a new one with the same name.
+
+\subsection{Getting Help}\label{getting-help}
+
+\begin{itemize}
+\tightlist
+\item
+  Post questions on Slack in \texttt{\#problem-sets}
+\item
+  Come to office hours
+\item
+  Your TF can walk you through this in section
+\end{itemize}
+
+\subsection{Grading}\label{grading}
+
+This assignment is graded on completion only. Submit a screenshot
+showing you've created a repository with an edited \texttt{README}.
+
+\subsection{Learning Objectives}\label{learning-objectives}
+
+After completing this assignment, you will:
+
+\begin{itemize}
+\tightlist
+\item
+  Have a GitHub account for professional use
+\item
+  Understand basic repository creation
+\item
+  Be ready to submit future assignments via GitHub
+\end{itemize}
 
 \end{document}
