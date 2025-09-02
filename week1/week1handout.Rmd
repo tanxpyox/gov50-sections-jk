@@ -51,13 +51,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 - For tech assistance or help with homework: **Course Assistant-led Study Halls**
 
-  >Study halls are a combination of office hours and drop-in tutoring sessions. Course assistants will hold a table usually at one of the house dining halls or common rooms and help students with assignments and course material. Study halls work best if you come as a group and work on the assignments on your own while you are there and ask for help from the CAs when you get stuck.
+  >Study halls are a combination of office hours and drop-in tutoring sessions. Course assistants will hold a table usually at the CGIS Fisher Family Commons and help students with assignments and course material. Study halls work best if you come as a group and work on the assignments on your own while you are there and ask for help from the CAs when you get stuck.
   
   >Schedule: Mondays and Wednesdays, 5pm to 9pm (see Syllabus for location)
 
 - For initial help with course content: ask on course Slack (accessible via Canvas sidebar) or sign up for my office hours
 
-- For perspective and inspiration: sign up for Scott's office hours
+- For perspective and inspiration: sign up for Scott's office hours: \url{https://calendly.com/causalinf/office-hours} 
 
 # Getting the most (grades) out of this class
 
@@ -161,38 +161,15 @@ This repository contains my work for Gov 50 (Fall 2025).
   - Your repository name (`gov50-fall2025`)
   - Your edited README content
 
-## Troubleshooting
 
-**"GitHub says my username is taken"**
-
-Try adding numbers or your middle initial.
-
-**"I can't find the edit button"**
-
-Make sure you're logged in and viewing your own repository.
-
-**"I accidentally deleted my repository"**
-
-No problem! Just create a new one with the same name.
-
-## Getting Help
-- Post questions on Slack in `#problem-sets`
-- Come to office hours
-
-## Grading
-This assignment is graded on completion only. Submit a screenshot showing you've created a repository with an edited `README`.
-
-## Learning Objectives
-After completing this assignment, you will:
-
-- Have a GitHub account for professional use
-- Understand basic repository creation
-- Be ready to submit future assignments via GitHub
-
-# Problem Set 0b: Slack introduction
+# Problem Set 0b: Slack Introduction
 
 1. Join the course Slack via Canvas
 2. Post a short introduction message in the `#general` channel.
 3. Take a screen shot of your introduction message
 4. Go to Gradescope ([gradescope.com](gradescope.com)) and find "Problem Set 0: Getting Started"
 5. Upload your screenshots from 0a and 0b to Gradescope
+
+## Grading
+
+This assignment is graded on completion only.
