@@ -97,7 +97,7 @@ Generic advice for maximising grades and efficiency
 
 \begin{center}
   \section{Problem Set 0a: GitHub Setup}
-  \textbf{Due: Monday, September 9, 2024 at 11:59 PM}
+  \textbf{Due: Wednesday, September 10, 2024 at 11:59 PM}
 \end{center}
 
 
@@ -117,18 +117,26 @@ This assignment will get you set up with GitHub, which we'll use throughout the 
 3. Choose a username (this will be public, so pick something professional)
 4. Use your Harvard email (optional)
 5. Complete the signup process
+6. Download GitHub Desktop and log in with your new account
 
 ### Part 2: Create Your First Repository
-1. Once logged in, click the green "New" button or the "+" icon
-2. Name your repository: `gov50-fall2024`
-3. Check the box that says "Add a README file"
-4. Leave everything else as default
-5. Click "Create repository"
+1. On GitHub Desktop, click "Add" > "Create New Repository"
+2. Name the repository `gov50-fall2024`
+3. Set the local path to a folder where you'll keep your course work
+4. Choose "R" as the language
+5. Click "Create Repository"
+6. Click "Publish repository" to upload it to GitHub (make sure "Keep this code private" is checked; you will be make a public repo later for your projects)
 
-### Part 3: Edit Your README
+### Part 3: Set up RStudio
+1. Open RStudio
+2. Go to "File" > "New Project" > "Existing Directory" > Choose the GitHub folder you just created
+3. Click "Create Project"
+4. Click "New File", name it as `README.md`, and save it in the project directory
+
+### Part 4: Edit Your README
+
 1. Click on the `README.md` file
-2. Click the pencil icon to edit
-3. Delete the existing text and add:
+2. Add:
 
 ```{.md}
 # Gov 50: Data Science for Social Sciences
@@ -139,18 +147,18 @@ Harvard ID: [Your HUID]
 This repository contains my work for Gov 50 (Fall 2024).
 ```
 
-4. Scroll down and click "Commit changes"
+3. Hit save
+4. Go back to GitHub Desktop, you should see the changes listed
 5. In the commit message box, write "Initial setup"
 6. Click "Commit changes"
+7. Click "Push origin" to upload the changes to GitHub
 
-### Part 4: Submit to Gradescope
-1. Take a screenshot showing:
+### Part 5: Submit to Gradescope
+1. Go to github.com and navigate to your `gov50-fall2024` repository 
+2. Take a screenshot showing:
   - Your GitHub username in the top right
   - Your repository name (`gov50-fall2024`)
   - Your edited README content
-2. Save this screenshot as `lastname_ps0a.png`
-3. Go to Gradescope (accessiblie via Canvas) and find "PS0a: GitHub Setup"
-4. Upload your screenshot
 
 ## Troubleshooting
 
@@ -169,7 +177,6 @@ No problem! Just create a new one with the same name.
 ## Getting Help
 - Post questions on Slack in `#problem-sets`
 - Come to office hours
-- Your TF can walk you through this in section
 
 ## Grading
 This assignment is graded on completion only. Submit a screenshot showing you've created a repository with an edited `README`.
@@ -180,3 +187,11 @@ After completing this assignment, you will:
 - Have a GitHub account for professional use
 - Understand basic repository creation
 - Be ready to submit future assignments via GitHub
+
+# Problem Set 0b: Slack introduction
+
+1. Join the course Slack via Canvas
+2. Post a short introduction message in the `#general` channel.
+3. Take a screen shot of your introduction message and upload to Gradescope
+4. Go to Gradescope ([gradscope.com](gradscope.com)) and find "Problem Set 0: Getting Started"
+5. Upload your screenshots from 0a and 0b to Gradescope
