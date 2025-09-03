@@ -253,179 +253,102 @@ Generic advice for maximising grades and efficiency
 \newpage
 
 \begin{center}
-  \section{Problem Set 0a: GitHub Setup}
+  \section{Problem Set 0: Getting Started with R, R Studio, and Slack}
   \textbf{Due: Wednesday, September 10, 2025 at 11:59 PM}
 \end{center}
 
-\subsection{Overview}\label{overview}
+\subsection{Installing R and RStudio}\label{installing-r-and-rstudio}
 
-This assignment will get you set up with GitHub, which we'll use
-throughout the semester to share code and track your work. Think of
-GitHub as Google Docs for code - it saves your history and lets you
-collaborate.
-
-\subsection{What You'll Do}\label{what-youll-do}
+In this problem set, we're going to get R, RStudio, and R Markdown set
+up on your computer. To get started, follow these steps:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
-  Create a GitHub account
+  Download and install the most recent version of
+  \href{https://cloud.r-project.org/}{R (click me)}. There are versions
+  available for the Windows, Mac, and Linux operating systems. On a
+  Windows machine, you will want to install using the
+  \texttt{R-x.y.z-win.exe} file where \texttt{x.y.z} is a version
+  number. On a Mac, you will want to install using the
+  \texttt{R-x.y.z.pkg} file that is notarized and signed.
 \item
-  Create your first repository
+  With R installed, download and install
+  \href{https://posit.co/download/rstudio-desktop/}{RStudio (click me)}.
+  RStudio is a type of ``integrated development environment'' or IDE
+  designed for R. It makes working with R considerably easier and is
+  available for most platforms. It is also free.
 \item
-  Edit a \texttt{README} file
-\item
-  Submit proof to Gradescope
-\end{enumerate}
-
-\subsection{Step-by-Step Instructions}\label{step-by-step-instructions}
-
-\subsubsection{Part 1: Create Your GitHub
-Account}\label{part-1-create-your-github-account}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Go to \url{https://github.com}
-\item
-  Click ``Sign up''
-\item
-  Choose a username (this will be public, so pick something
-  professional)
-\item
-  Use your Harvard email (optional)
-\item
-  Complete the signup process
-\item
-  Download GitHub Desktop and log in with your new account
-\end{enumerate}
-
-\subsubsection{Part 2: Create Your First
-Repository}\label{part-2-create-your-first-repository}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  On GitHub Desktop, click ``Add'' \textgreater{} ``Create New
-  Repository''
-\item
-  Name the repository \texttt{gov50-fall2025}
-\item
-  Set the local path to a folder where you'll keep your course work
-\item
-  Choose ``R'' as the language
-\item
-  Click ``Create Repository''
-\item
-  Click ``Publish repository'' to upload it to GitHub (make sure ``Keep
-  this code private'' is checked; you will be make a public repo later
-  for your projects)
-\end{enumerate}
-
-\subsubsection{Part 3: Set up RStudio}\label{part-3-set-up-rstudio}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Open RStudio
-\item
-  Go to ``File'' \textgreater{} ``New Project'' \textgreater{}
-  ``Existing Directory'' \textgreater{} Choose the GitHub folder you
-  just created
-\item
-  Click ``Create Project''
-\item
-  Click ``New File'', name it as \texttt{README.md}, and save it in the
-  project directory
-\end{enumerate}
-
-\subsubsection{Part 4: Edit Your README}\label{part-4-edit-your-readme}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Click on the \texttt{README.md} file
-\item
-  Add:
+  Open the .Rmd version of this file in RStudio. Install the packages we
+  will use throughout the semester. To do this, either type or copy and
+  paste each of the following lines of code into the ``Console'' in
+  RStudio (lower left panel by default). Make sure you do this
+  separately for each line. If you are asked if you want to install any
+  packages from source, type ``no''. Note that the symbols next to
+  \texttt{my\_package} are a less than sign \texttt{\textless{}}
+  followed by a minus sign \texttt{-} with no space between them. (Don't
+  be worried if you see some red text here. Those are usually just
+  messages telling you information about the packages you are
+  installing. Unless you see the word \texttt{Error} you should be
+  fine.)
 \end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{\# Gov 50: Data Science for the Social Sciences}
-
-\NormalTok{Name: }\CommentTok{[}\OtherTok{Your Name}\CommentTok{]}
-
-\NormalTok{Harvard ID: }\CommentTok{[}\OtherTok{Your HUID}\CommentTok{]}
-
-\NormalTok{This repository contains my work for Gov 50 (Fall 2025).}
+\NormalTok{my\_packages }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"usethis"}\NormalTok{, }\StringTok{"devtools"}\NormalTok{, }\StringTok{"learnr"}\NormalTok{,}
+                 \StringTok{"gitcreds"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(my\_packages, }\AttributeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{2}
+\setcounter{enumi}{3}
 \tightlist
 \item
-  Hit save
-\item
-  Go back to GitHub Desktop, you should see the changes listed
-\item
-  In the commit message box, write ``Initial setup''
-\item
-  Click ``Commit changes''
-\item
-  Click ``Push origin'' to upload the changes to GitHub
+  For some things in the course, we'll need produce PDFs from R and that
+  requires something called LaTeX. If you've never heard of that, it's
+  completely fine and you should just run the following two lines of R
+  code:
 \end{enumerate}
 
-\subsubsection{Part 5: Submit to
-Gradescope}\label{part-5-submit-to-gradescope}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{\textquotesingle{}tinytex\textquotesingle{}}\NormalTok{)}
+\NormalTok{tinytex}\SpecialCharTok{::}\FunctionTok{install\_tinytex}\NormalTok{()  }\CommentTok{\# install TinyTeX}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Joining the Course Slack}\label{joining-the-course-slack}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
 \tightlist
 \item
-  Go to github.com and navigate to your \texttt{gov50-fall2025}
-  repository
-\item
-  Take a screenshot showing:
+  In the left hand menu on Canvas click the item called Slack. Slack is
+  the main way forum we will use to send out announcements and answer
+  questions for this course. Post a short introduction message in the
+  \#general channel
+  (e.g.~\texttt{Hi\ all,\ my\ name\ is\ Noah\ and\ I\textquotesingle{}m\ looking\ forward\ to\ this\ class})
 \end{enumerate}
 
-\begin{itemize}
-\tightlist
-\item
-  Your GitHub username in the top right
-\item
-  Your repository name (\texttt{gov50-fall2025})
-\item
-  Your edited README content
-\end{itemize}
-
-\section{Problem Set 0b: Slack
-Introduction}\label{problem-set-0b-slack-introduction}
+\subsection{Submitting}\label{submitting}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
 \tightlist
 \item
-  Join the course Slack via Canvas
-\item
-  Post a short introduction message in the \texttt{\#general} channel.
-\item
-  Take a screen shot of your introduction message
-\item
-  Go to Gradescope (\url{gradescope.com}) and find ``Problem Set 0:
-  Getting Started''
-\item
-  Upload your screenshots from 0a and 0b to Gradescope
+  Click the \texttt{Knit} button near the top of the RStudio window,
+  this should create a pdf version of this document in the same place
+  you are storing this .Rmd file (we strongly recommend having a
+  dedicated folder for Gov50 assignments). If you encounter any issues
+  knitting seek help from a TF or CA. Upload the pdf in Gradescope (can
+  be reached via the left hand menu on Canvas) under the assignment
+  \texttt{Problem\ Set\ 0:\ Getting\ Started}. This along with your
+  written introduction in Slack constitutes the assignment. This
+  assignment is graded on completion only.
 \end{enumerate}
-
-\subsection{Grading}\label{grading}
-
-This assignment is graded on completion only.
 
 \end{document}
