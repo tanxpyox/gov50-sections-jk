@@ -1,0 +1,67 @@
+---
+title: "\\textsc{Week 2 Handout}"
+subtitle: "Gov 50 Data Science for the Social Sciences"
+subject: "Week 2 Handout"
+author: "John Koo"
+date: "September 9, 2025"
+csl: american-political-science-association.csl
+
+classoption: [letterpaper]
+
+header-includes:
+  - \usepackage[notextcomp]{kpfonts}
+  - \usepackage{Inconsolata}
+  - \usepackage{caption}
+  - \usepackage{array,booktabs}
+  - \usepackage{float}
+  - \captionsetup*{labelfont={sc},textfont={it},labelsep={colon},justification=centering,singlelinecheck=true}
+
+fontsize: 11pt
+
+output: 
+  pdf_document:
+    # latex_engine: xelatex
+    keep_tex: true
+    number_sections: false
+urlcolor: blue
+---
+
+<style type="text/css">
+    ol { list-style-type: lower-alpha; }
+</style>
+
+# Math Recap
+
+## Probabilities and expectations
+
+\begin{table}[!h]
+\centering
+  \begin{tabular}{c c@{\hspace{7em}} c@{\hspace{6em}}}
+  \toprule
+   {} & Discrete Variables & Continuous Variables \\
+   \midrule
+  Distribution & {                } & {                } \vspace{5em}\\ 
+  Probability & & \vspace{5em} \\ 
+  Expectation & & \vspace{5em} \\ 
+  \bottomrule
+  \end{tabular}
+\end{table}
+
+*Q: What is the expectation of a six-sided die?*
+
+\vspace{10em}
+
+\newpage 
+
+## Conditional Probabilities and Conditional Expectation
+
+Bayes Rule:
+
+\vspace{5em}
+
+*Q: What is the expectation of a six-sided die, given that the number is even?*
+
+\vspace{10em}
+
+## Potential Outcomes Framework and Causal Inference
+

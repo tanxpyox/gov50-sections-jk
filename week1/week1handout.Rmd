@@ -63,8 +63,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 - Podcast and Article Responses (5%) [one two-page doc every other week]
 - Problem Sets (20%) [seven to eight in total]
-- Mid-term exam (20%) [in-class, written, closed book]
-- Final exam (20%) [in-class, written, closed book]
+- Mid-term exam (25%) [in-class, written, closed book]
+- Final exam (25%) [in-class, written, closed book]
 - *Final project* (25%) 
 
 \newpage
