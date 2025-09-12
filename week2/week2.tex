@@ -198,6 +198,25 @@ number is even?}
 \subsection{Potential Outcomes Framework and Causal
 Inference}\label{potential-outcomes-framework-and-causal-inference}
 
+\[
+\begin{aligned}
+\mathrm{ATE}  & = \mathbb{E}[Y_{i}(1)-Y_{i}(0)] \\
+ \widehat{ \mathrm{ATE} } = \mathrm{SDO}  & = \mathbb{E}[Y_{i} \mid D_{i} = 1]-\mathbb{E}[Y_{i} \mid D_{i} = 0]
+\end{aligned}
+\]
+
+(Note: Hat means ``estimator of''; vanilla ATE is not identifiable IRL
+because of the fundamental problem of causal inference - you can't
+observe \(Y_{i}(1)\) and \(Y_{i}(0)\) at the same time)
+
+\[
+\mathrm{ATT} = \mathbb{E}[Y_{i}(1) \mid D_{i} = 1]-\underbrace{ \mathbb{E}[Y_{i}(0) \mid D_{i} = 1] }_{ \mathrm{not \ observable} }
+\]
+
+\[
+\mathrm{ATU} = \underbrace{ \mathbb{E}[Y_{i}(1) \mid D_{i} = 0] }_{ \mathrm{not \ observable} }-\mathbb{E}[Y_{i}(0) \mid D_{i} = 0] 
+\]
+
 \newpage
 
 \section{Class practice}\label{class-practice}

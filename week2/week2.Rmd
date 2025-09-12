@@ -87,6 +87,25 @@ $$
 
 ## Potential Outcomes Framework and Causal Inference
 
+
+
+$$
+\begin{aligned}
+\mathrm{ATE}  & = \E[Y_{i}(1)-Y_{i}(0)] \\
+ \widehat{ \mathrm{ATE} } = \mathrm{SDO}  & = \E[Y_{i} \mid D_{i} = 1]-\E[Y_{i} \mid D_{i} = 0]
+\end{aligned}
+$$
+
+(Note: Hat means "estimator of"; vanilla ATE is not identifiable IRL because of the fundamental problem of causal inference - you can't observe $Y_{i}(1)$ and $Y_{i}(0)$ at the same time)
+
+$$
+\mathrm{ATT} = \E[Y_{i}(1) \mid D_{i} = 1]-\underbrace{ \E[Y_{i}(0) \mid D_{i} = 1] }_{ \mathrm{not \ observable} }
+$$
+
+$$
+\mathrm{ATU} = \underbrace{ \E[Y_{i}(1) \mid D_{i} = 0] }_{ \mathrm{not \ observable} }-\E[Y_{i}(0) \mid D_{i} = 0] 
+$$
+
 \newpage
 
 # Class practice
