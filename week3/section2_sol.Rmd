@@ -5,9 +5,10 @@ output:
   html_document: default
 ---
 
-<style type="text/css">
-    ol { list-style-type: lower-alpha; }
-</style>
+```{r setup, include = FALSE}
+options(width = 100)
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 # Introduction
 
@@ -53,8 +54,7 @@ Name                Description
 
 ## Question 1: Reading data into R
 
-We first need to load the data into R and make it as `tibble` object. 
-Load the `tidyverse` package, read the data using the `read_csv()` function and save it as `elec` (using `read_csv()` will automatically make `elec` a tibble).
+We first need to load the data into R and make it a `tibble` object, which is a version of a dataset that is easier to manipulate and display using `tidyverse` commands. Load the `tidyverse` package, read the data using the `read_csv()` function and save it as `elec` (using `read_csv()` will automatically make `elec` a tibble).
 
 How many counties are there included in `elec`?
 
@@ -81,7 +81,7 @@ Before we investigate the data, let's create some new variables: called `gop_vs_
 - `gop_vs_16`: compute the Republican vote share as a proportion of total votes in 2016 (Number of votes for the Republican party in the 2016 election/ Total number of votes in the 2016 election).
 - `gop_vs_diff`: compute the *percent difference* in this Republican vote share variable from the 2012 to 2016 election (i.e., `(gop_vs_16 - gop_vs_12)/gop_vs_12 * 100`).
 
-*Hint*: Use the `mutate()` function and the pipe operator (`|>`). Check the lecture slides for some details.
+*Hint*: Use the `mutate()` function and the pipe operator (`|>`). Check the coding cheat sheets and previous section materials for some details.
 
 ## Answer 2
 
@@ -96,9 +96,7 @@ elec <- elec |>
 
 ## Question 3
 
-Once you created the columns, print the `head` of the `elec` dataframe for *only* those three new columns (`gop_vs_12`, `gop_vs_16`, and `gop_vs_diff`). Use `knitr::kable()` to produce a nicely formatted table.
-
-*Hint*: Use the `select()` function and the pipe operator (`|>`). 
+Once you created the columns, print the `head` of the `elec` dataframe for *only* those three new columns (`gop_vs_12`, `gop_vs_16`, and `gop_vs_diff`). To do this use the `select()` function which subsets your data to only the variables passed into the `select()` function. Lastly use the `knitr::kable()` function on your subsetted data to produce a nicely formatted table.
 
 
 
@@ -116,9 +114,9 @@ elec |>
 
 ## Question 4: Subsetting the data
 
-Subset your `elec` data to just the "battleground" states: Florida (FL), North Carolina (NC), Ohio (OH), Pennsylvania (PA), New Hampshire (NH), Michigan (MI), Wisconsin (WI), Iowa (IA), Nevada (NV), Colorado (CO), and Virginia (VA). Save this subset as a new `tibble` object called `elec_battle`.
+Subset your `elec` data to just the "battleground" states: Florida (FL), North Carolina (NC), Ohio (OH), Pennsylvania (PA), New Hampshire (NH), Michigan (MI), Wisconsin (WI), Iowa (IA), Nevada (NV), Colorado (CO), and Virginia (VA). To do this, utilize the `filter()` function which takes as it's argument a logical statement that is either `TRUE` or `FALSE` depending on the row. The function will then keep only those rows for which the statement is `TRUE`. Save this  subset as a new `tibble` object called `elec_battle`.
 
-*Hint*: You may create a new vector that contains all the 2-letter abbreviations of battleground states `battlestates_abb <- c(...)`. Then, use `filter()` and `%in%` to subset the data to the battleground states with `state` column.
+*Hint*: You may want to create a new vector (a list created with `c()`) that contains all the 2-letter abbreviations of battleground states: `battlestates_abb <- c(...)`. Then, use `filter()` and `%in%` to subset the data to the battleground states with `state` column.
 
 ## Answer 4
 
@@ -136,9 +134,9 @@ elec_battle
 
 ## Question 5: State-level summarize
 
-Now let's create a state-level summary of this subset, `elec_battle` with `summarize()`. Create a state-level average of socio-demographic variables (`pct_for_born15`, `pct_bach_deg15`, `pct_non_white15`, `pct_non_white15`, `pct_unemp12`, `pct_unemp16`) and vote share variables (`gop_vs_12`, `gop_vs_16`, `gop_vs_diff`).
+Now let's create a state-level summary of this subset, `elec_battle` with `group_by()` and `summarize()`. `group_by()` as the name suggests groups the data by the variable(s) passed into it as arguments and `summarize()` then creates a new dataset with statistics calculated *within* those groups. Create a state-level average of socio-demographic variables (`pct_for_born15`, `pct_bach_deg15`, `pct_non_white15`, `pct_non_white15`, `pct_unemp12`, `pct_unemp16`) and vote share variables (`gop_vs_12`, `gop_vs_16`, `gop_vs_diff`).
 
-*Hint*: Review `group_by()`, `select()` and `summarize()` functions.
+*Hint*: Review `group_by()`, `select()` and `summarize()` functions in Coding Cheat Sheet 3: Data Wrangling!
 
 ## Answer 5
 
@@ -154,7 +152,7 @@ elec_battle |>
 
 Create a barplot for the top 20 counties in terms of the difference in GOP vote share between the 2012 and 2016 elections (`gop_vs_diff`), using `elec` data. Order the bars based on the values of vote share difference. The result looks like the following:
 
-![](barplot.png)
+![](figures/barplot.png)
 
 *Hint*: Sample codes using `geom_bar()`
 ```{r eval=FALSE}
