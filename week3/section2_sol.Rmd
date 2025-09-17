@@ -58,20 +58,18 @@ We first need to load the data into R and make it a `tibble` object, which is a 
 
 How many counties are there included in `elec`?
 
-## Answer 1
 
-```{r read_data}
-# load tidyverse
+```{r}
 library(tidyverse)
 
-# read data
 elec <- read_csv("data/uselection.csv")
 
-# check the data
-elec
+# optional
+head(elec)
+glimpse(elec)
 ```
 
-There are `r nrow(elec)` counties in the data.
+
 
 ## Question 2: Preprocessing the data
 
@@ -83,32 +81,29 @@ Before we investigate the data, let's create some new variables: called `gop_vs_
 
 *Hint*: Use the `mutate()` function and the pipe operator (`|>`). Check the coding cheat sheets and previous section materials for some details.
 
-## Answer 2
 
-```{r preprocess}
-# Create new columns, and save those to original object for future use
+```{r}
 elec <- elec |>
-  mutate(gop_vs_12 = votes_gop_12/votes_total_12,
-         gop_vs_16 = votes_gop_16/votes_total_16) |>
-  mutate(gop_vs_diff = (gop_vs_16 - gop_vs_12)/gop_vs_12 * 100)
-```
+  mutate(gop_vs_12 = votes_gop_12 / votes_total_12,
+         gop_vs_16 = votes_gop_16 / votes_total_16,
+         gop_vs_diff = (gop_vs_16 - gop_vs_12)/gop_vs_12 * 100)
 
+# equiv. to mutate(elec, ...)
+  
+```
 
 ## Question 3
 
 Once you created the columns, print the `head` of the `elec` dataframe for *only* those three new columns (`gop_vs_12`, `gop_vs_16`, and `gop_vs_diff`). To do this use the `select()` function which subsets your data to only the variables passed into the `select()` function. Lastly use the `knitr::kable()` function on your subsetted data to produce a nicely formatted table.
 
-
-
-## Answer 3
-
-```{r print}
-# Print three new columns
-elec |>
-  head() |>
+```{r}
+elec |> 
   select(gop_vs_12, gop_vs_16, gop_vs_diff) |>
+  head() |>
   knitr::kable()
 ```
+
+
 
 
 
@@ -118,18 +113,14 @@ Subset your `elec` data to just the "battleground" states: Florida (FL), North C
 
 *Hint*: You may want to create a new vector (a list created with `c()`) that contains all the 2-letter abbreviations of battleground states: `battlestates_abb <- c(...)`. Then, use `filter()` and `%in%` to subset the data to the battleground states with `state` column.
 
-## Answer 4
+```{r}
+swing_states <- c("FL", "NC", "OH", "PA", "NH", "MI", "WI", "IA", "NV", "CO", "VA")
 
-```{r subset}
-# 2-letter abbreviations of battleground states
-battlestates_abb <- c("FL", "NC", "OH", "PA", "NH", "MI", "WI", "IA", "NV", "CO", "VA")
-
-# subset of data
 elec_battle <- elec |>
-  filter(state %in% battlestates_abb)
-
-elec_battle
+  filter(state %in% swing_states)
 ```
+
+
 
 
 ## Question 5: State-level summarize
@@ -138,13 +129,20 @@ Now let's create a state-level summary of this subset, `elec_battle` with `group
 
 *Hint*: Review `group_by()`, `select()` and `summarize()` functions in Coding Cheat Sheet 3: Data Wrangling!
 
-## Answer 5
-
-```{r summarize}
+```{r}
 elec_battle |>
   group_by(state) |>
   select(pct_for_born15:gop_vs_diff) |>
-  summarize(across(where(is.numeric), mean, na.rm = TRUE))
+  summarize(across(where(is.numeric), mean, na.rm = T))
+
+# John's note: across(...) is quick, but it's bad practice, instead, list
+#   the variables one by one like the following:
+# elec_battle |>
+#   group_by(state) |>
+#   select(pct_for_born15:gop_vs_diff) |>
+#   summarize(pct_for_born15 = mean(pct_for_born15),
+#             pct_bach_deg15 = mean(pct_bach_deg15),
+#             ...)
 ```
 
 
@@ -161,45 +159,30 @@ Create a barplot for the top 20 counties in terms of the difference in GOP vote 
 # Option 1 (geom_bar)
 ## geom_bar() uses stat_count() by default: it counts the number of cases at each x position.
 ## for the purpose of this question, we need to change stat argument (see below).
-<data> |>
-  slice_max(<variable1>, n = 20) |>
-  ggplot(aes(x = fct_reorder(<variable2>, desc(<variable1>)), y = <variable1>)) +
-  geom_bar(stat = "identity") +
-  labs(title = <title>, 
-       x = <xlab>, y = <ylab>)
-
-# Option 2 (geom_col)
-## geom_col() uses stat_identity(): it leaves the data as is.
-<data> |>
-  slice_max(<variable1>, n = 20) |>
-  ggplot(aes(x = fct_reorder(<variable2>, desc(<variable1>)), y = <variable1>)) +
-  geom_col() +
-  labs(title = <title>, 
-       x = <xlab>, y = <ylab>)
-```
-
-## Answer 6
-
-```{r barplot, fig.height=5, fig.width=10}
-# Option 1 (geom_bar)
-## geom_bar() uses stat_count() by default: it counts the number of cases at each x position.
-## for the purpose of this question, we need to change stat argument (see below).
 elec |>
   slice_max(gop_vs_diff, n = 20) |>
   ggplot(aes(x = fct_reorder(county, desc(gop_vs_diff)), y = gop_vs_diff)) +
   geom_bar(stat = "identity") +
-  labs(title = "The percent difference in Republican vote share from the 2012 to 2016 election", 
-       x = "County", y = "Percent Difference")
+  labs(title = "Title", 
+       x = "County", 
+       y = "Percentage difference") +
+  theme(
+    axis.text.x = position(angle = 90)
+  )
+
+# John's note - just stick to geom_bar; no one really uses geom_col
 
 # Option 2 (geom_col)
-## geom_col() uses stat_identity(): it leaves the data as is.
-elec |>
-  slice_max(gop_vs_diff, n = 20) |>
-  ggplot(aes(x = fct_reorder(county, desc(gop_vs_diff)), y = gop_vs_diff)) +
-  geom_col() +
-  labs(title = "The percent difference in Republican vote share from the 2012 to 2016 election", 
-       x = "County", y = "Percent Difference")
+# elec |>
+#   slice_max(gop_vs_diff, n = 20) |>
+#   ggplot(aes(x = fct_reorder(county, desc(gop_vs_diff)), y = gop_vs_diff)) +
+#   geom_col() +
+#   labs(title = "The percent difference in Republican vote share from the 2012 to 2016 election", 
+#        x = "County", y = "Percent Difference")
 ```
+
+
+
 
 
 ## Question 7: Republican gains in Democrat counties
@@ -208,20 +191,22 @@ Some of the counties where the Republican party saw greater gains were counties 
 
 ```{r}
 elec <- elec |>
-  mutate(dem_win_12 = dplyr::if_else(votes_dem_12 > votes_gop_12, "Dem win", "Rep win"))
+  mutate(dem_win_12 = dplyr::if_else(votes_dem_12 > votes_gop_12, 
+                                     "Dem win", 
+                                     "Rep win"))
 ```
 
 Now repeat the plot in Question 5,  adding `mapping = aes(fill = dem_win_12)` to the `geom_bar` function. What is your interpretation of this figure?
 
-## Answer 7
-
-```{r barplot2, fig.height=10, fig.width=12}
+```{r}
 elec |>
   slice_max(gop_vs_diff, n = 20) |>
-  ggplot(aes(x = fct_reorder(county, desc(gop_vs_diff)), y = gop_vs_diff)) +
-  geom_bar(mapping = aes(fill = dem_win_12), stat = "identity") +
-  labs(title = "The percent difference in Republican vote share from the 2012 to 2016 election", 
-       x = "County", y = "Percent Difference") +
+  ggplot(aes(x = fct_reorder(county, desc(gop_vs_diff)), y = gop_vs_diff,
+             fill = dem_win_12)) + 
+  geom_bar(stat = "identity") +
+  labs(title = "Title", 
+       x = "County", 
+       y = "Percentage difference") +
   scale_fill_manual(values = c("blue", "red"))
 ```
 
@@ -231,10 +216,7 @@ Create a table for the top 20 counties in terms of the difference in GOP vote sh
 
 *Hint*: Use `knitr::kable()` to produce a nicely formatted table. [Optional] To make the table neater, round off numbers to two decimal places and change the column names. See R documentation (`?kable`) for the arguments.
 
-
-## Answer 8
-
-```{r table}
+```{r}
 elec |>
   slice_max(gop_vs_diff, n = 20) |>
   select(state, county, pct_for_born15:gop_vs_diff) |>
@@ -244,5 +226,8 @@ elec |>
                              "Rep. 2012", "Rep. 2016", "Rep. difference"), 
                digits = 2)
 ```
+
+
+
 
 
