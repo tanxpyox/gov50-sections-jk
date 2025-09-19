@@ -91,7 +91,7 @@ e_{11}-e_{00} & = \mathrm{ATE} + (1-p)e_{11}  - (1-p)e_{10} + p{e_{01}} -p e_{00
 $$
 *Q.E.D.*
 
-> This proof can also be completed by factorizing the terms with $p$, but you will arrive at a slightly different expression for the biases: $$ e_{11} - e_{01} = \mathrm{ATE} + (e_{11}-e_{10})-p(\mathrm{ATU-ATT})$$
+> This proof can also be completed by factorizing the terms with $p$, but you will arrive at a slightly different expression for the biases: $$ e_{11} - e_{01} = \mathrm{ATE} + (e_{11}-e_{10})-p(\mathrm{ATT-ATU})$$
 > The proof is left as an exercise for the reader.
 
 ***
