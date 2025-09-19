@@ -170,7 +170,13 @@ elec |>
     axis.text.x = position(angle = 90)
   )
 
-# John's note - just stick to geom_bar; no one really uses geom_col
+# To rotate the x-axis text, appending (+) the following to the ggplot:
+
+# theme(
+#   axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)
+# )
+
+# John's note on option 2- just stick to geom_bar; no one really uses geom_col
 
 # Option 2 (geom_col)
 # elec |>
@@ -208,6 +214,7 @@ elec |>
        x = "County", 
        y = "Percentage difference") +
   scale_fill_manual(values = c("blue", "red"))
+
 ```
 
 ## Question 8: Table
