@@ -94,7 +94,13 @@ STAR |>
 table(STAR$race, STAR$kinder)
 
 #and prop table to get proportion: "2" for columnwise %, "1" for rowwise %, and blank for % of total
-prop.table(table(STAR$race, STAR$kinder),2)
+prop.table(table(STAR$race, STAR$kinder), 2)
+
+# Option 2 - coding with lists
+# race_categories = c("white", "black", "asian", "hispanic","native american", "others")
+# Only works for converting numerical labels from 1..N to factor 
+
+# STAR$race_labels = race_categories[race] 
 ```
 
 There do not appear to be any significant, systemic differences in race across the treatments.
