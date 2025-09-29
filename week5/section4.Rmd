@@ -1,0 +1,144 @@
+---
+title: "Poverty and Economic Decision-Making"
+subtitle: "Gov 50 - Section 4"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup}
+options(width = 100)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Introduction
+
+
+Do changes in one's financial circumstances affect one's decision-making process and cognitive capacity? In an experimental study, researchers randomly selected a group of US respondents to be surveyed before their payday and another group to be surveyed after their payday. Under this design, the respondents of the `Before Payday` group are more likely to be financially strained than those of the `After Payday` group.  The researchers were interested in investigating whether or not changes in people's financial circumstances affect their decision making and cognitive performance. Other researchers have found that scarcity induce an additional mental load that impedes cognitive capacity.  This exercise is based on:
+
+Carvalho, Leandro S., Meier, Stephen, and Wang, Stephanie W. (2016). "[Poverty and economic decision-making: Evidence from changes in financial resources at payday.](http://dx.doi.org/10.1257/aer.20140481)" *American Economic Review*, Vol. 106, No. 2, pp. 260-284. 
+
+In this study, the researchers administered a number of decision-making and cognitive performance tasks to the `Before Payday` and `After Payday` groups. We focus on the *numerical stroop task*, which measures cognitive control.  In general, taking more time to complete this task indicates less cognitive control and reduced cognitive ability. They also measured the amount of cash the respondents have, the amount in their checking and saving accounts, and the amount of money spent.  The data set is in the CSV file `poverty.csv`. The names and descriptions of variables are given below:
+
+-------------------------------------------------------------------------------
+ Name                         Description
+ ---------------------------- ---------------------------------------------------------
+  `treatment`                 Treatment conditions: `Before Payday` and `After Payday`
+  
+  `cash`                      Amount of cash respondent has on hand
+  
+  `accts_amt`                 Amount in checking and saving accounts
+  
+  `stroop_time`               Log-transformed average response time for cognitive 
+                              stroop test
+  
+  `income_less20k`            Binary variable: `1` if respondent earns less than 20k a 
+                              year and `0` otherwise
+-------------------------------------------------------------------------------
+  
+
+
+## Question 1: Summary Statistics
+
+First, read in the experiment's data from `poverty.csv` into an object named `dat`, using `read_csv()`. 
+
+We may think that a respondent's financial situation is important in this experiment. Let's get some summary statistics for `cash` and `accts_mt` to help us understand these variables better. 
+
+Use the `summary()` function to learn about the distribution of cash on hand and money in the bank in our sample. Instead of using the pipe `|>`, be sure to use the `$` to tell R which column you want to summarize. You can use the following format: `summary(dataset$variable)` 
+
+Then, use the `group_by()` and `summarize()` functions to look at the `mean()`, `median()`, and `sd()` (standard deviation) of the cash variable, for the two groups (Before Payday and After Payday).
+
+What do you notice about these variables that may be important for the study? Do you think the mean or the median is a better summary statistic of the central tendency of these variables? And is there significant variation in the spread before and after payday?
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Question 2: Proportion table
+
+Now let's look at the outcome variable `stroop_time`. Use `case_when` to make a new variable called `stroop_3way` that breaks the continuous variable `stroop_time` into three categories : under 7 seconds, between 7 and 7.5 seconds, and more than 7.5 seconds. Then create a pivot table that shows the proportions of the sample that fall into these three categories. 
+
+* Hint: Create a table of counts by first mutating to create the `stroop_3way` variable for the groups, then use `group_by()` and `summarize()` to get a new column named `count` with the counts for each group. Then use `mutate()` to add a column of proportions and `select(-count)` to drop the `count` column, so we're just left with proportions. Finally, use `pivot_wider()` to get the final pivot table.
+
+
+
+
+
+
+## Question 3: Examining and plotting variables with multiple groupings
+
+Next let's look at the distribution of cash on hand by treatment status and income. 
+
+First, use `mutate()` to create a new variable called `income_less20k_rec` that recodes the current income variable `income_less20k` to have more informative values. Replace the numerical values from `income_less20k` with "Lower income" and "Higher income" for this new variable. **Save this variable into the dataset (keep the name `dat`)**. Then create a table that shows average cash on hand for each combination of the income indicator and the treatment assignment. 
+
+Then create a bar plot of the data in the table using `ggplot`. The y-axis should show cash on hand and the x-axis should show the income indicator. The plot should contain double bars, with one bar corresponding to before payday and one bar corresponding to after payday. Make sure to set informative labels and a title too!
+
+* Hint: To create the double bars, use `geom_col(position = "dodge").` You will also have to set the `fill()` argument in the `aes()` function in order to specify that there should be separate bars for before/after payday.
+
+
+
+
+
+
+## Question 4: Average Treatment Effect
+
+Now let's calculate the Average Treatment Effect (ATE), both overall and then within income groups, using the same $20k income cutoff as Question 3. What is the effect of payday on stroop test results? Do these effects change when looking at higher and lower income groups?
+
+* Hint: We will use `group_by()`, `summarize()`, `pivot_wider()`, and `mutate()` to find the ATE both times.
+
+
+
+
+
+
+
+## Question 5: Missing data
+
+Now let's look to see how our average treatment effect and case count (how many observations we have) changes based on what we decide to do with missing data.
+
+First make a table that shows the mean outcome and case count for `stroop_time` by treatment status. 
+
+Then replicate that table but first drop all cases that have missing values using `drop_na()`. 
+
+Finally, replicate the table again, but this time drop only cases that have missing values for the `cash` variable (you will want to use a combination of `filter()` and `is.na()`). You will need to use the `!` operator to filter your data down to the set of observations for which `cash` is **not** missing. Remember - we can use the `!` operator to negate logical statements (e.g., `!=` means "not equal to").
+
+Compare the averages for `Before Payday` and `After Payday` and the accompanying case counts across the three tables. What do you notice?
+
+
+
+
+
+
+
+
+
+
+## Question 6: BONUS QUESTION - Examining central tendency, range and spread by subgroup
+
+Let's take another look at the distribution of financial resources by income level. Create a table that groups by the low income indicator variable `income_less20k`. Look at the table at the beginning of this activity to get more information about this variable. This indicator variable should be in the rows and you should have the following summary statistics for `accts_amt` in the columns: 
+
+* mean
+* median
+* standard deviation
+* minimum value
+* maximum value
+
+After creating the table, plot the distribution of `accts_amt` for each income group using `geom_histogram()` and `facet_wrap()`. Add vertical lines for the mean and median on each graph using `geom_vline()` - be sure to make the mean and median lines different colors.
+
+Does the table or the plot give you more detailed information about the distribution of `accts_amt`? When might it be helpful to provide more detailed information and when might it be helpful to provide less detailed information to your audience?
+
+
+
+
+
+
+
