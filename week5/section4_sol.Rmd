@@ -52,26 +52,26 @@ What do you notice about these variables that may be important for the study? Do
 
 ## Answer 1
 
-```{r, include = F}
-library(tidyverse)
-```
-
 ```{r}
+library(tidyverse)
 dat <- read_csv("data/poverty.csv")
 
-## Using summary()
-
 summary(dat$cash)
+
 summary(dat$accts_amt)
 
-## Filtering for summary statistics
+# Method 1: na.rm in each function
+dat |> group_by(treatment) |>
+  summarize(mean_cash = mean(cash, na.rm = T),
+            median_cash = median(cash, na.rm = T),
+            sd_cash = sd(cash, na.rm = T))
 
-## do with group_by()
-dat |> 
+# Method 2: filter by !is.na(var)
+dat |> filter(!is.na(cash)) |>
   group_by(treatment) |> 
-  summarize(mean_cash = mean(cash, na.rm = TRUE),
-            median_cash = median(cash, na.rm = TRUE),
-            sd_cash = sd(cash, na.rm = TRUE))
+  summarize(mean_cash = mean(cash),
+            median_cash = median(cash),
+            sd_cash = sd(cash))
 ```
 
 These variables have a very wide range with a large gap between the two measures of central tendency. The value of the mean is much higher than the median, telling us that we likely have a few very large outliers at the high end of cash on hand and amount of money in the bank. In this case, the median is generally going to be a better measure of central tendency because it is not impacted by the magnitude of the outliers. Unsurprisingly, all three variables increase after payday, but standard deviation increases by nearly $\$200$.
@@ -89,20 +89,12 @@ Now let's look at the outcome variable `stroop_time`. Use `case_when` to make a 
 ## Answer 2
 
 ```{r}
-dat |>
-## create new breakdown variable based on stroop_time
-  mutate(stroop_3way = case_when(stroop_time < 7~ "Under 7",
-                                 stroop_time > 7 & stroop_time <= 7.5 ~ "Between 7 and 7.5",
-                                 stroop_time > 7.5 ~ "More than 7.5")) |>
-## group by and summarize to get
-  group_by(stroop_3way) |>
-  summarize(count = n()) |>
-## create new proportion variable, and drop counts
-  mutate(prop = count/sum(count)) |> 
-  select(-count) |> 
-## pivot wider!
-  pivot_wider(names_from = stroop_3way,
-              values_from = prop)
+dat <- dat |> 
+  mutate(stroop_3way = case_when(stroop_time < 7 ~ "Under 7",
+                                 stroop_time >= 7 & stroop_time < 7.5 ~ "Between",
+                                 stroop_time >= 7.5 ~ "More than 7.5"))
+
+table(dat$stroop_3way) |> prop.table()
 ```
 
 
@@ -123,19 +115,20 @@ Then create a bar plot of the data in the table using `ggplot`. The y-axis shoul
 
 ```{r}
 dat <- dat |> 
-  mutate(income_less20k_rec = if_else(income_less20k == 1, "Lower income", "Higher income"))
+  mutate(income_less20k_rec = ifelse(income_less20k, 
+                                     "Lower income", "Higher income") |>
+            factor(levels = c("Lower income", "Higher income")))
 
-tab1 <- dat |> 
-  group_by(income_less20k_rec, treatment) |>
-  summarize(mean_cash = mean(cash, na.rm=TRUE)) 
-tab1
+# dat$income_less20k_rec <- factor(dat$income_less20k_rec, levels = c("Lower income", "Higher income"))
 
-plot1 <- tab1 |>
-  ggplot(mapping = aes(x = income_less20k_rec, y = mean_cash, fill = treatment)) +
-  geom_col(position = "dodge") +
-  labs(x = "Income grouping", y = "Average cash on hand", title = "Average Cash on Hand Pre-and-Post-Treatment by Income Group")
-  
-plot1
+plot_table1 <- dat |> group_by(income_less20k_rec, treatment) |>
+  summarize(mean_cash = mean(cash, na.rm = T))
+
+plot_table1
+
+ggplot(plot_table1, mapping = aes(x = income_less20k_rec, y = mean_cash,
+                        fill = treatment)) + 
+  geom_bar(stat = "identity", position = "dodge") 
 ```
 
 
