@@ -1,0 +1,131 @@
+---
+title: 'Democracy and Redistribution'
+subtitle: 'Gov 50 Section 5'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup}
+options(width = 100)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction 
+
+A long-standing debate in the social sciences is: \textbf{Do democracies redistribute more to low-income citizens than autocracies?} In other words, do democracies tend to collect more taxes from the rich than from the poor, and also redistribute more of those taxes to the poor as social welfare? The conventional wisdom is that democracies redistribute more to the poor, because politicians are democratically elected and thus are more attentive to mass welfare. However, the following paper finds \textbf{statistical} evidence against this conventional wisdom:
+
+Ross, Michael (2006), "[Is Democracy Good for the Poor](https://doi.org/10.1111/j.1540-5907.2006.00220.x)", *American Journal of Political Science*, Vol. 50, No. 4, pp. 860 - 874.
+
+Ross argued that previous studies had paid insufficient attention to the problem of \textbf{missing data}. Information about particular countries and variables is often missing, and this absence of data is often \textbf{not random}. For example, autocratic countries are less likely to report their statistics to international institutions like the World Bank, so researchers often lack complete data from autocracies. Yet, starting in the 1990s, countries have become better at both collecting and reporting data on different indicators such as economic growth or infant mortality. As such, the patterns of missing data depend on both regime type and time trends, and analyzing data without considering these factors might bias our conclusions.
+
+Let's delve into Ross' data to understand better the issue of missing not at random. Below you will find a dictionary with the main variables in two datasets we will analyze:
+
+**World Bank:** `wb.csv`
+
+Name                 Description
+-------------------  --------------------------------------------------------
+`country_name`        Country name.
+`country_code`        Country abbreviation.
+`year`                Year.
+`gdp_growth`          GDP growth rate (percentage).      
+`gdp_per_capita`      GDP per capita (current US$).
+`infant_death`.       Infant mortality (deaths per 1000 children under 5).
+`population_density`  Population density (per sq. km).
+`budget_edu`          Education spending as percentage of government budget.
+`budget_health`       Public health spending as percentage of government budget.
+
+**Polity IV:** `polity.csv`
+
+Name                 Description
+-------------------  ---------------------------------------------------------
+`country_code`        Country abbreviation.
+`year`                Year.
+`polity`              Polity Score. Ranges from -10 (most autocratic) to 10 (most democratic)
+
+## Question 1: Wide to Long Data
+
+Before we analyze these two datasets, you'll notice that the `polity.csv` data is in the wide format, rather than the long format as shown by the table above. In the wide format, the rows correspond to countries, and the values across the columns in each row are the Polity scores for a country across all years. For data analysis, we usually want to use data in long format, such that we have a single column for each variable. 
+
+Now, load the two datasets and save them as `wb` and `polity`, respectively; then, use `pivot_longer()` to convert the `polity` dataset into long format with three columns: `year`, `country_code`, and `polity`. Be sure to save this back as the `polity` dataset.
+
+
+
+
+
+
+## Question 2: Joining
+
+Now that we have two long datasets, let's join them together. Two of the most common types of joins are `left_join()`, which keeps all rows in the "left-hand" data regardless of whether there is a match in the data being joined (the "right-hand" data), and `inner_join()`, which keeps only the rows that are present in both datasets.
+
+Now, choose either `left_join()` or `inner_join()` to perform the joining. Before attempting either method, decide which type you think you should use and why, supposing that the `wb` data is the left-hand-side dataset. Keep in mind that all subsequent analysis here will look at the relationship between `polity` scores and various measures in `wb`. 
+
+Then, perform your chosen join, store the result in a new object called `wb_polity` and inspect the resulting data. How many rows does it have? Do you notice any missing data? Do you think you chose the right join? 
+
+
+
+
+
+
+
+## Question 3: Democracy and Public Health
+
+  Now that we have joined the two datasets together, we can examine the relationship between variables in them. We want to know whether and how the degree of democracy (measured by the Polity score `polity`) is related to a measure of government redistribution: Public Health Spending as % of Government Budget. We will examine their relationship in two steps:
+  
+  First, create a scatter plot via `ggplot()` and `geom_point()` with Polity score on the $x$-axis and the public health spending measure (look at the variables in the Introduction to see what column this is in) on the $y$-axis. Can you tell what their relationship is just by looking at the scatter plot?
+  
+  Second, let's calculate the correlation between the two variables using `cor()`. A little bit about the correlation coefficient: roughly it captures the tendency of two variables to move together. Positive values mean the two variables tend to be big/small (relative to their distribution!) at the same time for the same observations. Negative values mean when one variable is bigger the other tends to be smaller and vice versa. It is scaled between -1 and 1 where a value closer to 0 indicates a weaker relationship (no linear association) and a higher magnitude indicates a stronger relationship.
+  
+  Note that the `use` argument of `cor()` will need to be changed so that the correlation is only using observations where both variables are not missing (i.e., no NAs). Interpret what the correlation coefficient suggests for the relationship between the degree of democracy and public health spending.
+  
+* Hint: Look at the documentation for the `cor()` function using `?cor` to see what arguments it takes around NAs
+
+
+
+
+
+
+## Question 4: Democracy and Education
+
+Now, let's consider the other measure of redistribution in the dataset:  Education Spending as % of Government Budget. Identify which column in the joined dataset contains this information, and then repeat the previous two steps for this variable and interpret your results.
+
+
+
+
+
+
+
+## Question 5: Z-Score Function
+
+Next, let's write a function called `my_z()` that will take a column of our data and return the standardized values of the column where standardized means adjusted for the mean and standard deviation. The formula for the Z-score for some variable $x$ is:
+
+$$
+Z = \frac{x - \text{mean}(x)}{\text{sd}(x)}
+$$
+
+You can also use the following template for the general composition of a user-defined function. You get to decide how many arguments (also called inputs), so you may not need the same number as are in the template. Make sure you include the `return(...)` statement to tell your function what you want to output.
+
+```{r, eval = F}
+
+my_function <- function(arg1, arg2, arg3, arg4, ...) {
+  result <- ...do something...
+  return(result)
+}
+
+```
+
+Once your create your function `my_z()`, use it to transform the `polity` variable and store the output in a new column called `polity_std`. (Hint: you can either use `mutate()` to create a new variable and `my_z()` as the function inside of that `mutate` call, or you can assign the output of your `my_z()` function to a new column in your dataset directly by doing `data$column <- `) Check to see that the standardized variable has mean 0 and standard deviation 1. 
+
+
+
+
+
+
+
+
+
+## Question 6: Missing Data
+
+Let's consider the issue of non-random missing data now. First, how serious is the issue of missing data in the dataset? Calculate the proportion of observations (country-year) that are missing in each of the health and education spending variables. 
+
+Second, by calculating the correlations using `cor()`, examine whether democracies or autocracies are more likely to have missing data in those two variables. To do this, create two new columns (`missing_edu` and `missing_health`) that are equal to 1 if the observation is missing that variable and 0 if it is not. Then use `cor()` to look at the correlation between those variables and `polity`.
