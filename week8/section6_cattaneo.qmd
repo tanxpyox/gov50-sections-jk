@@ -1,0 +1,141 @@
+---
+title: "Problem Set: Maternal Smoking and Infant Birthweight"
+author: "Scott Cunningham"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+library(tidyverse) 
+library(haven) 
+library(broom)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this problem set, you will analyze data from Cattaneo (2010), which examines the effect of maternal smoking during pregnancy on infant birthweight (measured in grams). This is the same dataset we used in our takehome exam. The data contains information on mothers, fathers, and newborns.
+
+Your goal is to explore how help students understand how regression can be used to estimate and interpret the relationship between smoking and birth outcomes. We are trying to connect the principles of OLS regressions to the earlier material in the class (i.e., SDO, matching), the idea of rebalancing versus prediction off fitted lines, correct interpretation of regression coefficients and the R-squared using both OLS output and visualization of mean predicted outcomes, $\frac{\sum_i^N \widehat{y_i}}{N}$.
+
+First, we will begin by importing the dataset from Cunningham's github repo with the read_dta command from the haven package.
+
+```{r}
+data <- read_dta("https://raw.github.com/scunning1975/mixtape/master/cattaneo2.dta")
+```
+
+In the cattaneo2 dataset are some of the following variables that we will use in the exercise.
+
+## Variables of Interest
+
+| Variable | Description |
+|----|----|
+| `bweight` | **Outcome variable**: Infant birthweight (grams) |
+| `mbsmoke` | **Treatment variable**: Mother smoked during pregnancy (1 = yes) |
+| `mage` | Mother's age |
+| `medu` | Mother's education (years) |
+| `mrace` | Mother's race (1 = White) |
+| `fedu` | Father's education (years) |
+| `fage` | Father's age |
+| `fhisp` | Father's Hispanic indicator variable (1 = yes) |
+| `frace` | Father's race (1 = White) |
+| `deadkids` | Number of previous newborns who died |
+| `nprenatal` | Number of prenatal visits |
+| `order` | Birth order of the infant |
+| `monthslb` | Months since last birth |
+| `prenatal1` | 1 if first prenatal visit was in 1st trimester |
+| `alcohol` | 1 if alcohol consumed during pregnancy |
+| `fbaby` | 1 if first baby |
+
+## Bivariate regression
+
+First we will run regressions and focus on calculation and interpretation, as well as visualization. Remember that the outcome is `bweight` and our treatment variable is `mbsmoke`.
+
+**Question 1 (1 points)**
+
+Compute the mean birthweight (`bweight`) for babies of smoking and nonsmoking mothers (`mbsmoke`). Calculate the simple difference in outcomes (SDO) between the two groups.
+
+```{r question_1}
+```
+
+1.  In your own words, interpret the SDO.
+2.  What treatment assignment mechanism is needed in order for the SDO to have a causal interpretation?
+
+**Question 2 (4 points)**
+
+Run a simple linear regression of birthweight on smoking (bweight \~ mbsmoke). Save the output as fit1 and display the estimated coefficients.
+
+```{r question_2}
+```
+
+1.  Interpret and compare the intercept term from this model to the mean birth weight of the control group from question 1.
+2.  Interpret and compare the regression coefficient on mbsmoke to the SDO from question 1.
+3.  What treatment assignment mechanism would give the coefficient on mbsmoke a causal interpretation?
+
+**Question 3 (2 points)**
+
+Create a visualization of average birthweight for mathers who smoked versus those who didn't smoke using the fit1 model.
+
+```{r question_3}
+```
+
+1.  Interpret the gap between these two horizontal lines and compare it with the SDO as well as the coefficient on mbsmoke from Quesiton 2.
+
+**Multivariate regression**
+
+Now we will move into regressions that include both the treatment variable, mbsmoke, as well as additional variables.
+
+**Question 4 (6 points)**
+
+Now rerun the regression of bweight onto mbsmoke but add maternal age (mage) as a control variable, save the output as fit2, display and interpret the results.
+
+```{r question_4}
+
+```
+
+1.  Compared to the previous regression, how did including mage change the coefficient on mbsmoke?
+
+**Question 5 (6 points)**
+
+Extend the model to include parental education levels (medu and fedu). Save this as fit3.
+
+```{r question_5}
+```
+
+1.  Compare the smoking coefficient across the three regressions (fit1, fit2, fit3).
+2.  What does the pattern suggest about the importance of omitted variables in estimating the causal effect of maternal smoking on infant birth weight?
+
+**Question 6 (5 points)**
+
+Similar to question 3, create a visualization of predicted birthweight for smoking vs. nonsmoking mothers using the model that controlled for mage, medu and fedu (fit3).
+
+```{r question_6}
+```
+
+1.  Compare this visualization to the visualization we did in Question 3 – how are they similar and how are they different?
+
+**Question 7 (2 points)**
+
+Compute and interpret the R-squared for each regression model.
+
+```{r question_7}
+```
+
+1.  How did the explanatory power of the model as measured using R-squared change as you included more and more covariates as controls?
+
+**Question 8 (6 points)**
+
+Run a regression including the complete set of conditioning variables below. Compare the coefficient on mbsmoke from this regression to earlier models.
+
+```{r question_8}
+
+```
+
+1.  How does the coefficient on mbsmoke change as we add all covariates?
+2.  How did the R-squared change as we included all covariates?
+3.  Why might including many controls strengthen or weaken the estimated effect?
+
+**Summary (Discussion)**
+
+Summarize your findings about the relationship between maternal smoking and infant birthweight. Do your regression results support the hypothesis that smoking causes lower birthweight? What assumptions are required for this conclusion to be causal?
+
+```{r print-code, ref.label = knitr::all_labels(), echo = FALSE, eval = FALSE}
+```
